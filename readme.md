@@ -1,1 +1,1 @@
-testing
+uvicorn main:app
