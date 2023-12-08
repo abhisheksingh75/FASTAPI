@@ -1,7 +1,13 @@
 # FastAPI app
 from fastapi import FastAPI
 
-app = FastAPI(title="Hello World App")
+tags_metadata = [
+    {
+        "name": "Hello World Application",
+    }
+]
+
+app = FastAPI(openapi_tags=tags_metadata)
 
 # Building an endpoint
 @app.get("/")
@@ -14,6 +20,3 @@ async def greet_user(name: str):
     
     greeting = f"Hello, {name}! Welcome to FastAPI."
     return {"message": greeting}
-
-# To run the application, use Uvicorn:
-# uvicorn main:app --reload
