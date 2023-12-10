@@ -8,7 +8,7 @@ class Item(BaseModel):
 
 tags_metadata = [
     {
-        "name": "Chapter 3 - Understanding Path Parameters"
+        "name": "Understanding Path Parameters"
     }
 ]
 
