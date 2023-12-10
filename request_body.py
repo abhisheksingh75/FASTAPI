@@ -43,7 +43,7 @@ async def create_book(book: BookCreate):
     }
 
 # FastAPI endpoint for handling HTTP GET requests at the path "/books/"
-@app.get("/books/")
+@app.get("/get_books/")
 async def get_books():
     """
     Endpoint to retrieve all books.
