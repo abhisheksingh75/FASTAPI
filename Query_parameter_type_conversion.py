@@ -1,6 +1,12 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+tags_metadata = [
+    {
+        "name": "Query parameters type conversion",
+    }
+]
+
+app = FastAPI(openapi_tags=tags_metadata)
 
 # Endpoint with query parameter type conversion
 @app.get("/multiply/")
