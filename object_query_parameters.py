@@ -1,39 +1,18 @@
 from fastapi import FastAPI, Query
-from pydantic import BaseModel
 
 app = FastAPI()
 
-# Pydantic model representing object query parameters
-class BookQueryParams(BaseModel):
-    publication_year: int
-    language: str
-
-# In a real application, you might have a database and perform queries here
-books = [
-    {"title": "Book 1", "author": "Author A", "genre": "fantasy", "publication_year": 2021, "language": "english"},
-    {"title": "Book 2", "author": "Author B", "genre": "mystery", "publication_year": 2022, "language": "spanish"},
-    {"title": "Book 3", "author": "Author A", "genre": "sci-fi", "publication_year": 2022, "language": "english"}
-]
-
-# Endpoint to retrieve books using object query parameters
-@app.get("/books/")
-async def get_books(params: BookQueryParams):
+# Endpoint using FastAPI's Query function with notations
+@app.get("/items/")
+async def read_item(name: str = Query(..., title="Item Name", description="Name of the item", min_length=3)):
     """
-    Retrieve a list of books using object query parameters.
+    Read an item with additional notations using FastAPI's Query function.
 
     Parameters:
-    - params: Object query parameter representing book filters
+    - name: Query parameter representing the item name with notations.
 
     Example Usage:
-    - /books/?publication_year=2022&language=english
+    - /items/?name=example_item
     """
 
-    # Apply filtering based on object query parameters
-    filtered_books = [
-        book for book in books
-        if (params.publication_year is None or book["publication_year"] == params.publication_year)
-           and (params.language is None or book["language"] == params.language)
-    ]
-
-    # Return the result
-    return {"query_params": params.dict(), "books": filtered_books}
+    return {"item_name": name}
