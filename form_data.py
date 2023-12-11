@@ -39,7 +39,7 @@ async def create_user(user: User):
 
 # Endpoint for user login
 @app.post("/login/")
-async def user_login(username: str = Form(...), password: str = Form(...)):
+async def user_login(username: str = user_login(...), password: str = Form(...)):
     """
     Endpoint to handle user login using a form.
 
