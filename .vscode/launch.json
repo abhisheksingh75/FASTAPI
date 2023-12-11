@@ -10,7 +10,7 @@
             "request": "launch",
             "module": "uvicorn",
             "args": [
-                "chapter9:app",
+                "request_body_file_upload:app",
                 "--reload"
             ],
             "jinja": true,
