@@ -3,16 +3,24 @@ from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
-# Custom Exception Handling
-class CustomException(Exception):
-    def __init__(self, message: str):
-        self.message = message
+# Mock database of books
+books = {
+    1: {"title": "Learning Python", "author": "Mark Lutz"},
+    2: {"title": "JavaScript: The Good Parts", "author": "Douglas Crockford"},
+}
 
-@app.exception_handler(CustomException)
-async def custom_exception_handler(request: Request, exc: CustomException):
-    return JSONResponse(content={"custom error": exc.message}, status_code=400)
+# Custom Exception for Book Not Found
+class BookNotFoundException(Exception):
+    def __init__(self, book_id: int):
+        self.message = f"Book with ID {book_id} not found"
+
+@app.exception_handler(BookNotFoundException)
+async def book_not_found_exception_handler(request: Request, exc: BookNotFoundException):
+    return JSONResponse(content={"error": exc.message}, status_code=404)
 
 
-@app.get("/custom_exception")
-async def trigger_custom_exception():
-    raise CustomException("This is a custom exception")
+@app.get("/book/{book_id}")
+async def get_book(book_id: int):
+    if book_id not in books:
+        raise BookNotFoundException(book_id)
+    return books[book_id]
