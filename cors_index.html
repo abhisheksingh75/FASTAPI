@@ -11,7 +11,7 @@
     <button id="fetchButton">Fetch Data</button>
     <script>
         document.getElementById('fetchButton').addEventListener('click', () => {
-            fetch('http://localhost:8000/items')
+            fetch('http://localhost:8000/cors-testing')
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.error('Error:', error));
