@@ -1,1 +1,8 @@
 .env
+__pycache__/
+nosql_db_example/__pycache__/
+nosql_db_example/config/__pycache__/
+nosql_db_example/models/__pycache__/
+nosql_db_example/routes/__pycache__/
+nosql_db_example/schema/__pycache__/
+sql_db_example/__pycache__/
