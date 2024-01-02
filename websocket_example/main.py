@@ -30,3 +30,8 @@ async def websocket_endpoint(websocket: WebSocket, username: str):
     except WebSocketDisconnect:
         manager.disconnect(username)
         await manager.broadcast(f"{username} left the chat")
+
+# add base path
+@app.get("/")
+async def root():
+    return {"message": "Chat Server is running. Interact with it using the frontend."}
