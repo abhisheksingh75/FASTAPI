@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ws;
+            var connectButton = document.getElementById("connectBtn");
+            var sendButton = document.getElementById("sendBtn");
+            var messages = document.getElementById("messages");
+            var usernameInput = document.getElementById("username");
+            var messageInput = document.getElementById("messageText");
+
+            connectButton.onclick = function() {
+                var username = usernameInput.value;
+                ws = new WebSocket("ws://localhost:8000/ws/" + username);
+                
+                ws.onmessage = function(event) {
+                    var message = document.createElement("p");
+                    message.textContent = event.data;
+                    messages.appendChild(message);
+                };
+
+                ws.onopen = function(event) {
+                    connectButton.disabled = true;
+                    sendButton.disabled = false;
+                    messageInput.disabled = false;
+                };
+            };
+
+            sendButton.onclick = function() {
+                ws.send(messageInput.value);
+                messageInput.value = "";
+            };
+        });
+    </script>
+</head>
+<body>
+    <h2>Chat Room</h2>
+    <input type="text" id="username" placeholder="Enter your username">
+    <button id="connectBtn">Connect</button>
+    <div id="messages" style="height:300px; overflow:auto; border:1px solid #ccc; padding:10px;"></div>
+    <input type="text" id="messageText" placeholder="Type a message..." disabled>
+    <button id="sendBtn" disabled>Send</button>
+</body>
+</html>
