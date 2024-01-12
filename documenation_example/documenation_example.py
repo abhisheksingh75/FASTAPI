@@ -15,15 +15,15 @@ app = FastAPI(
     title="Book Library API",
     description=description,
     version="1.0.0",
-    terms_of_service="http://example.com/terms/",
+    terms_of_service="http://abc.com/terms/",
     contact={
         "name": "Library Administrator",
-        "email": "lib-admin@example.com",
-        "url": "http://library.example.com/contact/"
+        "email": "lib@abc.com",
+        "url": "http://library.abc.com/contact/"
     },
     license_info={
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
+        "name": "Licensed Under R&D License",
+        "url": "http://abc.com/license/"
     }
 )
 
@@ -59,7 +59,7 @@ async def get_books():
     This endpoint returns an array of book objects.
     """
     # Logic to retrieve all books
-    return [{"id": 1, "title": "1984", "author": "George Orwell", "isbn": "1234567890", "publication_year": 1949}]
+    return [{"id": 1, "title": "2000", "author": "Ron Dill", "isbn": "1234567890", "publication_year": 1950}]
 
 @app.get("/books/{book_id}", tags=["Books"])
 async def get_book(book_id: int):
@@ -69,4 +69,4 @@ async def get_book(book_id: int):
     - **book_id**: The unique identifier of the book.
     """
     # Logic to retrieve a specific book
-    return {"id": book_id, "title": "Brave New World", "author": "Aldous Huxley", "isbn": "0987654321", "publication_year": 1932}
+    return {"id": book_id, "title": "Brave red", "author": "Alexa", "isbn": "0987644321", "publication_year": 1940}
